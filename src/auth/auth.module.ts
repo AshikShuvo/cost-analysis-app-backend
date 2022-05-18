@@ -9,6 +9,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
     secret:'supper-secret-key'
   })],
   providers: [AuthService,JwtStrategy],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports:[AuthService]
 })
 export class AuthModule {}
