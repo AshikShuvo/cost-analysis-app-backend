@@ -1,11 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { ConflictException, HttpException, Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
-
+import * as bcrypt from 'bcrypt';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { User,Prisma } from '@prisma/client';
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private readonly prismaService:PrismaService){}
+  async create(data: Prisma.UserCreateInput) :Promise<User|void> {
+    const salt = bcrypt.genSaltSync(10);
+    data['salt']=salt;
+    data.password=bcrypt.hashSync(data.password,salt);
+    try{
+      return await this.prismaService.user.create({data})
+    }catch(error){
+      throw new ConflictException()
+    }
+   
+    
   }
 
   findAll() {
