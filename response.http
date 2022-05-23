@@ -18,3 +18,8 @@ content-type: application/json
     "phoneNumber":"01730959501",
     "password":"123456"
 }
+
+###get all users
+GET  http://localhost:3100/users HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzaGlrc2h1dm8xOTk3QGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiMDE3MzA5NTk1MDEiLCJpYXQiOjE2NTMyODI4MjB9.FHImFxxnQrs8K7Jx1IqgSnH53wZPT7Yyb4xGa03eZwE

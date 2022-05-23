@@ -1,10 +1,11 @@
-import { ConflictException, HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User,Prisma } from '@prisma/client';
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthService } from 'src/auth/auth.service';
+
 @Injectable()
 export class UsersService {
   constructor(private readonly prismaService:PrismaService,private readonly authService:AuthService){}
@@ -36,7 +37,7 @@ export class UsersService {
       }
       return this.authService.signUser(user.email,user.phoneNumber)
   }
-
+  
   findAll() {
     return `This action returns all users`;
   }

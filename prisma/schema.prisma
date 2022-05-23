@@ -18,5 +18,19 @@ model User {
   lastName String
   salt String
   password String
+  incomeList income[]
+}
+model income {
+   id    Int        @default(autoincrement()) @id
+   title String
+   type incomeType  @default(SALARY)
+   amount Decimal   @default(0.0)
+   owner     User   @relation(fields: [ownerId], references: [id])
+   ownerId   Int
+}
+
+enum incomeType{
+  SALARY
+  BUSINESS 
 }
 
